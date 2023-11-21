@@ -41,5 +41,3 @@ const productId = 1;
 const mostrarProducto = miProductManager.getProductById(productId);
 
 console.log(mostrarProducto);
-
-//cosa
