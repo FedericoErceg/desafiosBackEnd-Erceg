@@ -3,8 +3,14 @@ class ProductManager {
         this.products = [];
     }
 
+    static id = 0;
     
     addProduct(title, descripcion, price, thumbnail, code, stock){
+        if(this.products.some((product) => product.code === code)){
+            console.error("El producto ya existe");
+            return;
+        }
+
         ProductManager.id++;
         const producto = {
             id: ProductManager.id,
@@ -19,11 +25,11 @@ class ProductManager {
     }
     
     getProducts(prodId){
-        return this.products.find(prod => prod.id === prodId);
+        return this.products;
     }
 
     getProductById(prodId){
-        const productoPorId = this.getProducts(prodId);
+        const productoPorId = this.products.find((prod) => prod.id === prodId);
         if(productoPorId){
             return productoPorId;
         } else{
@@ -35,9 +41,14 @@ class ProductManager {
 
 const miProductManager = new ProductManager();
 
-miProductManager.addProduct('Coca cola', 'lata de cola sabor a coca cola bien fresca', 600, './img/cocacola.png', 200, 1)
+miProductManager.addProduct('Coca cola', 'lata de cola sabor a coca cola bien fresca', 600, './img/cocacola.png', 200, 1);
+miProductManager.addProduct('7UP', 'Lata de 7up con sabor a lima limon', 600, './img/7UP.png', 300, 1);
 
-const productId = 1;
-const mostrarProducto = miProductManager.getProductById(productId);
+console.log(miProductManager.getProducts());
 
-console.log(mostrarProducto);
+const productoConId2 = miProductManager.getProductById(2);
+const productoConId3 = miProductManager.getProductById(3);
+
+console.log(productoConId2);
+console.log(productoConId3);
+
